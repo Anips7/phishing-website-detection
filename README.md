@@ -1,96 +1,157 @@
-# Phishing Website Detection Using Machine Learning
+# 🛡️ Phishing Website Detection Using Machine Learning
+
 ### Class Project
 
 ---
 
-## Objective
-Build a machine learning system that automatically detects phishing websites based on URL and webpage features.
+## 📌 Objective
+
+To build a machine learning system that automatically detects phishing websites based on URL and webpage features.
+
+Phishing websites mimic legitimate websites to steal sensitive information such as passwords, banking details, and personal data.
 
 ---
 
-## Project Structure
+## 📂 Project Structure
+
 ```
 phishing_detection/
 ├── phishing_detection.py   ← Main script (run this)
 ├── predict.py              ← Predict on new URLs
+├── convert_dataset.py      ← Converts ARFF → CSV
 ├── requirements.txt        ← Python dependencies
 ├── data/
-│   └── phishing.csv        ← (Download UCI dataset here — optional)
+│   └── phishing.csv        ← Dataset (generated after conversion)
 └── outputs/
     ├── results.csv             ← Model performance table
-    ├── model_comparison.png    ← Bar chart of all models
+    ├── model_comparison.png    ← Comparison graph
     ├── confusion_matrices.png  ← Confusion matrices
-    └── feature_importance.png  ← Top 15 features (Random Forest)
+    └── feature_importance.png  ← Top features (Random Forest)
 ```
 
 ---
 
-## Setup & Run
+## ⚙️ Tech Stack
+
+* Python
+* Scikit-learn
+* TensorFlow / Keras
+* Pandas, NumPy
+* Matplotlib
+
+---
+
+## 📊 Models Used
+
+| Model                        | Type                | Library          |
+| ---------------------------- | ------------------- | ---------------- |
+| Logistic Regression          | Linear classifier   | scikit-learn     |
+| Random Forest                | Ensemble (bagging)  | scikit-learn     |
+| Gradient Boosting            | Ensemble (boosting) | scikit-learn     |
+| Support Vector Machine (SVM) | Kernel-based        | scikit-learn     |
+| Deep Neural Network (DNN)    | Neural network      | TensorFlow/Keras |
+
+---
+
+## 📊 Model Performance (Actual Results)
+
+| Model               | Accuracy | Precision | Recall | F1 Score |
+| ------------------- | -------- | --------- | ------ | -------- |
+| Logistic Regression | 0.93     | 0.94      | 0.90   | 0.92     |
+| Random Forest       | 0.98     | 0.98      | 0.96   | 0.97     |
+| Gradient Boosting   | 0.96     | 0.96      | 0.95   | 0.95     |
+| SVM                 | 0.96     | 0.96      | 0.94   | 0.95     |
+| Deep Neural Network | 0.97     | 0.97      | 0.96   | 0.96     |
+
+---
+
+## 📈 Visualization
+
+![Model Comparison](outputs/model_comparison.png)
+
+---
+
+## 📊 Dataset
+
+* Source: UCI Phishing Websites Dataset
+* Total Samples: ~11,000
+* Features: 30
+
+### Feature Categories:
+
+* **URL-based** → IP address, URL length, @ symbol, prefix/suffix
+* **Domain-based** → SSL state, domain age, DNS record
+* **HTML/JS-based** → iframe, mouseover, popups
+* **External** → Google index, page rank, web traffic
+
+### Feature Encoding:
+
+* `-1` → Phishing
+* `0` → Suspicious
+* `1` → Legitimate
+
+---
+
+## 🚀 How to Run
 
 ### 1. Install dependencies
+
 ```bash
 pip install -r requirements.txt
 ```
 
-### 2. (Optional) Use the real UCI dataset
-- Download from: https://archive.ics.uci.edu/ml/datasets/Phishing+Websites
-- Save file as `data/phishing.csv`
-- The script auto-detects it. Without it, a realistic synthetic dataset is used.
+### 2. Convert dataset
 
-### 3. Run the project
+```bash
+python convert_dataset.py
+```
+
+### 3. Run the model
+
 ```bash
 python phishing_detection.py
 ```
 
 ### 4. View results
-All output files are saved to the `outputs/` folder.
+
+All outputs will be saved in the `outputs/` folder.
 
 ---
 
-## Models Used
+## 🔍 Methodology
 
-| Model | Type | Library |
-|---|---|---|
-| Logistic Regression | Linear classifier | scikit-learn |
-| Random Forest | Ensemble (bagging) | scikit-learn |
-| Gradient Boosting | Ensemble (boosting) | scikit-learn |
-| SVM | Kernel-based | scikit-learn |
-| Deep Neural Network | Neural network | TensorFlow/Keras |
+1. Data Collection (UCI Dataset)
+2. Data Preprocessing
+3. Feature Scaling
+4. Model Training (5 algorithms)
+5. Model Evaluation using:
 
----
-
-## Dataset Features (30 total)
-
-The UCI Phishing dataset uses these feature categories:
-- **URL-based**: IP in URL, URL length, shortening service, @ symbol, double slash, prefix/suffix, subdomains
-- **Domain-based**: SSL state, domain registration length, DNS record, domain age
-- **HTML/JS-based**: Favicon, iFrame, mouseover, right-click disabled, popups
-- **External**: Google index, page rank, web traffic, links pointing to page
-
-All features are encoded as: `-1` (phishing indicator), `0` (suspicious), `1` (legitimate)
+   * Accuracy
+   * Precision
+   * Recall
+   * F1 Score
+6. Visualization of results
 
 ---
 
-## Expected Results
+## 📌 Conclusion
 
-| Model | Accuracy |
-|---|---|
-| Random Forest | ~97% |
-| Gradient Boosting | ~96% |
-| Deep Neural Network | ~95% |
-| SVM | ~92% |
-| Logistic Regression | ~88% |
+* Random Forest achieved the best performance (~98% accuracy)
+* Deep Neural Network also performed strongly (~97%)
+* Ensemble models outperformed linear models
+* Logistic Regression performed the lowest but still achieved good accuracy (~93%)
 
 ---
 
-## Report Sections (for submission)
+## 💡 Future Improvements
 
-1. **Introduction** — What is phishing? Why detect it?
-2. **Dataset** — UCI Phishing dataset, 11,055 samples, 30 features
-3. **Methodology** — Pipeline: collection → extraction → preprocessing → training → evaluation
-4. **Results** — Model comparison table + plots
-5. **Conclusion** — Random Forest performs best; ensemble methods outperform linear models
+* Deploy as a web application (Streamlit/Flask)
+* Real-time phishing detection system
+* Browser extension for live URL checking
+* Use advanced models like XGBoost
 
 ---
 
-*Built for academic/class purposes using publicly available data.*
+## 👨‍💻 Author
+
+**Anips Kumar Jena**
